@@ -4,6 +4,7 @@
 #include <ctime>
 #include <chrono>
 #include <iomanip>
+#include <fstream>
 #include "bubble_sort.h"
 #include "insertion_sort.h"
 #include "merge_sort.h"
@@ -123,6 +124,33 @@ void displayTestResult(const TestResult &result)
   cout << "  Tempo médio: " << fixed << setprecision(4) << result.averageTime << " ms" << endl;
 }
 
+void saveResultsToCSV(const vector<TestResult> &results, const string &filename)
+{
+  ofstream file(filename);
+  
+  if (!file.is_open())
+  {
+    cout << "\nErro ao abrir arquivo " << filename << " para escrita!" << endl;
+    return;
+  }
+
+  // Escrever cabeçalho
+  file << "Algoritmo,Tipo de Vetor,Tamanho do Vetor,Número de Comparações,Tempo Médio (ms)" << endl;
+
+  // Escrever dados
+  for (const auto &result : results)
+  {
+    file << result.algorithmName << ","
+         << result.inputType << ","
+         << ARRAY_SIZE << ","
+         << result.totalComparisons << ","
+         << fixed << setprecision(4) << result.averageTime << endl;
+  }
+
+  file.close();
+  cout << "\nResultados salvos em " << filename << endl;
+}
+
 void runAllTests()
 {
   cout << "\n"
@@ -138,6 +166,7 @@ void runAllTests()
       {5, "Heap Sort"}};
 
   vector<string> inputTypes = {"ASC", "DESC", "RAND"};
+  vector<TestResult> allResults;
 
   for (auto &alg : algorithms)
   {
@@ -151,6 +180,7 @@ void runAllTests()
       cout << "\n  Executando " << alg.second << " com vetor " << inputType << "..." << endl;
       TestResult result = runSortTest(alg.second, alg.first, inputType);
       displayTestResult(result);
+      allResults.push_back(result);
     }
   }
 
@@ -158,6 +188,9 @@ void runAllTests()
        << string(50, '=') << endl;
   cout << "TODOS OS TESTES FINALIZADOS" << endl;
   cout << string(50, '=') << endl;
+
+  // Salvar resultados em CSV
+  saveResultsToCSV(allResults, "resultados_testes.csv");
 }
 
 void runSingleAlgorithm(int choice)
@@ -182,18 +215,23 @@ void runSingleAlgorithm(int choice)
   cout << string(50, '=') << endl;
 
   vector<string> inputTypes = {"ASC", "DESC", "RAND"};
+  vector<TestResult> results;
 
   for (const auto &inputType : inputTypes)
   {
     cout << "\n  Executando " << alg.second << " com vetor " << inputType << "..." << endl;
     TestResult result = runSortTest(alg.second, alg.first, inputType);
     displayTestResult(result);
+    results.push_back(result);
   }
 
   cout << "\n"
        << string(50, '=') << endl;
   cout << "TESTE FINALIZADO" << endl;
   cout << string(50, '=') << endl;
+
+  // Salvar resultados em CSV
+  saveResultsToCSV(results, "resultados_" + alg.second + ".csv");
 }
 
 void displayAlgorithmMenu()

@@ -20,6 +20,7 @@ Este projeto implementa uma suite completa de testes para cinco algoritmos clás
 - ✅ Execução tripla de cada teste (calcula média de tempo e comparações)
 - ✅ Contagem de comparações para cada algoritmo
 - ✅ Medição de tempo de execução em milissegundos
+- ✅ Exportação automática de resultados em arquivo CSV
 
 ### Interface CLI
 - Menu principal com opções para executar testes separadamente ou todos
@@ -185,6 +186,37 @@ Onde:
 - **Tipo de Input**: Tipo de entrada (ASC = Ascendente, DESC = Descendente, RAND = Aleatória)
 - **Número de comparações**: Média de comparações realizadas em 3 execuções
 - **Tempo médio**: Tempo médio de execução em milissegundos
+
+## Exportação de Resultados em CSV
+
+O programa gera automaticamente um arquivo CSV com os resultados dos testes ao final da execução:
+
+### Ao rodar todos os testes
+Cria um arquivo chamado **`resultados_testes.csv`** contendo os dados de todos os 15 testes (5 algoritmos × 3 tipos de entrada).
+
+### Ao rodar testes individuais
+Cria um arquivo chamado **`resultados_[Nome_do_Algoritmo].csv`** contendo apenas os dados daquele algoritmo.
+
+### Formato do CSV
+
+O arquivo possui as seguintes colunas:
+- **Algoritmo**: Nome do algoritmo de ordenação
+- **Tipo de Vetor**: Tipo de entrada (ASC, DESC, RAND)
+- **Tamanho do Vetor**: Tamanho do array testado
+- **Número de Comparações**: Quantidade média de comparações
+- **Tempo Médio (ms)**: Tempo médio de execução em milissegundos
+
+Exemplo de saída:
+```
+Algoritmo,Tipo de Vetor,Tamanho do Vetor,Número de Comparações,Tempo Médio (ms)
+Bubble Sort,ASC,500,124750,0.5675
+Bubble Sort,DESC,500,124750,1.7280
+Bubble Sort,RAND,500,124750,1.2114
+Insertion Sort,ASC,500,499,0.0045
+...
+```
+
+Os arquivos CSV podem ser abertos em qualquer editor de texto ou planilha eletrônica (Excel, LibreOffice Calc, Google Sheets, etc.) para análise mais detalhada dos resultados.
 
 ## Detalhes Técnicos
 

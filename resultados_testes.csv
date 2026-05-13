@@ -1,0 +1,16 @@
+Algoritmo,Tipo de Vetor,Tamanho do Vetor,Número de Comparações,Tempo Médio (ms)
+Bubble Sort,ASC,500,124750,0.5675
+Bubble Sort,DESC,500,124750,1.7280
+Bubble Sort,RAND,500,124750,1.2114
+Insertion Sort,ASC,500,499,0.0045
+Insertion Sort,DESC,500,124750,1.2817
+Insertion Sort,RAND,500,63772,0.6600
+Merge Sort,ASC,500,4488,0.2163
+Merge Sort,DESC,500,4488,0.1246
+Merge Sort,RAND,500,4488,0.1350
+Quick Sort,ASC,500,4970,0.0367
+Quick Sort,DESC,500,4956,0.0584
+Quick Sort,RAND,500,4565,0.0458
+Heap Sort,ASC,500,7756,0.1141
+Heap Sort,DESC,500,7010,0.0684
+Heap Sort,RAND,500,7448,0.0772
