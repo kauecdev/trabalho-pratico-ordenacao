@@ -10,6 +10,7 @@
 #include "merge_sort.h"
 #include "quick_sort.h"
 #include "heap_sort.h"
+#include "aoh.h"
 
 using namespace std;
 
@@ -103,6 +104,9 @@ TestResult runSortTest(string algorithmName, int algorithm, string inputType, in
     case 5:
       comparisons = heapSort(testArray);
       break;
+    case 6:
+      comparisons = aoh(testArray);
+      break;
     }
 
     auto end = chrono::high_resolution_clock::now();
@@ -130,7 +134,7 @@ void displayTestResult(const TestResult &result)
 void saveResultsToCSV(const vector<TestResult> &results, const string &filename)
 {
   ofstream file(filename);
-  
+
   if (!file.is_open())
   {
     cout << "\nErro ao abrir arquivo " << filename << " para escrita!" << endl;
@@ -166,7 +170,8 @@ void runAllTests()
       {2, "Insertion Sort"},
       {3, "Merge Sort"},
       {4, "Quick Sort"},
-      {5, "Heap Sort"}};
+      {5, "Heap Sort"},
+      {6, "AOH (Quick + Insertion)"}};
 
   vector<string> inputTypes = {"ASC", "DESC", "RAND"};
   vector<TestResult> allResults;
@@ -208,9 +213,10 @@ void runSingleAlgorithm(int choice)
       {2, "Insertion Sort"},
       {3, "Merge Sort"},
       {4, "Quick Sort"},
-      {5, "Heap Sort"}};
+      {5, "Heap Sort"},
+      {6, "AOH (Quick + Insertion)"}};
 
-  if (choice < 1 || choice > 5)
+  if (choice < 1 || choice > 6)
   {
     cout << "\nEscolha invalida!" << endl;
     return;
@@ -258,7 +264,8 @@ void displayAlgorithmMenu()
   cout << "3 - Merge Sort" << endl;
   cout << "4 - Quick Sort" << endl;
   cout << "5 - Heap Sort" << endl;
-  cout << "6 - Voltar" << endl;
+  cout << "6 - AOH (Quick + Insertion)" << endl;
+  cout << "7 - Voltar" << endl;
   cout << string(50, '=') << endl;
   cout << "Sua escolha: ";
 }
@@ -299,11 +306,11 @@ int main()
         int algChoice;
         cin >> algChoice;
 
-        if (algChoice == 6)
+        if (algChoice == 7)
         {
           selectingAlgorithm = false;
         }
-        else if (algChoice >= 1 && algChoice <= 5)
+        else if (algChoice >= 1 && algChoice <= 6)
         {
           runSingleAlgorithm(algChoice);
         }
