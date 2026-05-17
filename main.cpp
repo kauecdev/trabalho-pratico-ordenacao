@@ -13,8 +13,8 @@
 
 using namespace std;
 
-const int ARRAY_SIZE = 500;
 const int NUM_EXECUTIONS = 3;
+const vector<int> ARRAY_SIZES = {100, 1000, 5000, 30000, 50000, 100000, 150000, 200000};
 
 vector<int> generateAscendingArray(int size)
 {
@@ -50,15 +50,17 @@ struct TestResult
 {
   string algorithmName;
   string inputType;
+  int arraySize;
   long long totalComparisons;
   double averageTime; // in milliseconds
 };
 
-TestResult runSortTest(string algorithmName, int algorithm, string inputType)
+TestResult runSortTest(string algorithmName, int algorithm, string inputType, int arraySize)
 {
   TestResult result;
   result.algorithmName = algorithmName;
   result.inputType = inputType;
+  result.arraySize = arraySize;
   result.totalComparisons = 0;
   double totalTime = 0.0;
 
@@ -66,15 +68,15 @@ TestResult runSortTest(string algorithmName, int algorithm, string inputType)
 
   if (inputType == "ASC")
   {
-    baseArray = generateAscendingArray(ARRAY_SIZE);
+    baseArray = generateAscendingArray(arraySize);
   }
   else if (inputType == "DESC")
   {
-    baseArray = generateDescendingArray(ARRAY_SIZE);
+    baseArray = generateDescendingArray(arraySize);
   }
   else if (inputType == "RAND")
   {
-    baseArray = generateRandomArray(ARRAY_SIZE);
+    baseArray = generateRandomArray(arraySize);
   }
 
   for (int exec = 0; exec < NUM_EXECUTIONS; exec++)
@@ -120,6 +122,7 @@ void displayTestResult(const TestResult &result)
 {
   cout << "\n  Algoritmo: " << result.algorithmName << endl;
   cout << "  Tipo de Input: " << result.inputType << endl;
+  cout << "  Tamanho do vetor: " << result.arraySize << endl;
   cout << "  Número de comparações: " << result.totalComparisons << endl;
   cout << "  Tempo médio: " << fixed << setprecision(4) << result.averageTime << " ms" << endl;
 }
@@ -142,7 +145,7 @@ void saveResultsToCSV(const vector<TestResult> &results, const string &filename)
   {
     file << result.algorithmName << ","
          << result.inputType << ","
-         << ARRAY_SIZE << ","
+         << result.arraySize << ","
          << result.totalComparisons << ","
          << fixed << setprecision(4) << result.averageTime << endl;
   }
@@ -172,15 +175,20 @@ void runAllTests()
   {
     cout << "\n"
          << string(50, '-') << endl;
-    cout << "Testando " << alg.second << " (Tamanho do vetor: " << ARRAY_SIZE << ")" << endl;
+    cout << "Testando " << alg.second << endl;
     cout << string(50, '-') << endl;
 
-    for (const auto &inputType : inputTypes)
+    for (const auto &arraySize : ARRAY_SIZES)
     {
-      cout << "\n  Executando " << alg.second << " com vetor " << inputType << "..." << endl;
-      TestResult result = runSortTest(alg.second, alg.first, inputType);
-      displayTestResult(result);
-      allResults.push_back(result);
+      cout << "\n  Tamanho do vetor: " << arraySize << endl;
+
+      for (const auto &inputType : inputTypes)
+      {
+        cout << "\n  Executando " << alg.second << " com vetor " << inputType << "..." << endl;
+        TestResult result = runSortTest(alg.second, alg.first, inputType, arraySize);
+        displayTestResult(result);
+        allResults.push_back(result);
+      }
     }
   }
 
@@ -204,25 +212,30 @@ void runSingleAlgorithm(int choice)
 
   if (choice < 1 || choice > 5)
   {
-    cout << "\Escolha inválida!" << endl;
+    cout << "\nEscolha invalida!" << endl;
     return;
   }
 
   auto alg = algorithms[choice - 1];
   cout << "\n"
        << string(50, '=') << endl;
-  cout << "Testando " << alg.second << " (Vetor de tamanho: " << ARRAY_SIZE << ")" << endl;
+  cout << "Testando " << alg.second << endl;
   cout << string(50, '=') << endl;
 
   vector<string> inputTypes = {"ASC", "DESC", "RAND"};
   vector<TestResult> results;
 
-  for (const auto &inputType : inputTypes)
+  for (const auto &arraySize : ARRAY_SIZES)
   {
-    cout << "\n  Executando " << alg.second << " com vetor " << inputType << "..." << endl;
-    TestResult result = runSortTest(alg.second, alg.first, inputType);
-    displayTestResult(result);
-    results.push_back(result);
+    cout << "\n  Tamanho do vetor: " << arraySize << endl;
+
+    for (const auto &inputType : inputTypes)
+    {
+      cout << "\n  Executando " << alg.second << " com vetor " << inputType << "..." << endl;
+      TestResult result = runSortTest(alg.second, alg.first, inputType, arraySize);
+      displayTestResult(result);
+      results.push_back(result);
+    }
   }
 
   cout << "\n"
@@ -257,7 +270,7 @@ void displayMainMenu()
   cout << "SUITE DE TESTES DE ALGORITMOS DE ORDENAÇÃO" << endl;
   cout << string(50, '=') << endl;
   cout << "1 - Rodar testes separadamente" << endl;
-  cout << "2 - Rodar todos os tests" << endl;
+  cout << "2 - Rodar todos os testes" << endl;
   cout << "3 - Encerrar programa" << endl;
   cout << string(50, '=') << endl;
   cout << "Sua escolha: ";

@@ -16,7 +16,7 @@ Este projeto implementa uma suite completa de testes para cinco algoritmos clás
 
 ### Suite de Testes
 - ✅ Testes com três tipos de entrada: Ascendente, Descendente e Aleatória
-- ✅ Tamanho fixo de array: 500 elementos
+- ✅ Testes com tamanhos de array: 100, 1.000, 5.000, 30.000, 50.000, 100.000, 150.000 e 200.000 elementos
 - ✅ Execução tripla de cada teste (calcula média de tempo e comparações)
 - ✅ Contagem de comparações para cada algoritmo
 - ✅ Medição de tempo de execução em milissegundos
@@ -158,11 +158,11 @@ SELECIONE O ALGORITMO
 Sua escolha:
 ```
 
-Escolha um algoritmo (1-5) ou `6` para voltar ao menu principal. O algoritmo será testado com as três variações de entrada.
+Escolha um algoritmo (1-5) ou `6` para voltar ao menu principal. O algoritmo será testado com as três variações de entrada em todos os tamanhos configurados.
 
 ### Opção 2: Rodar todos os testes
 
-Selecione `2` e todos os cinco algoritmos serão testados automaticamente com todas as três variações de entrada (Ascendente, Descendente e Aleatória).
+Selecione `2` e todos os cinco algoritmos serão testados automaticamente com todas as três variações de entrada (Ascendente, Descendente e Aleatória) em todos os tamanhos configurados.
 
 ### Opção 3: Encerrar
 
@@ -177,13 +177,15 @@ Para cada teste executado, o programa exibirá:
 
   Algoritmo: Bubble Sort
   Tipo de Input: ASC
-  Número de comparações: 124500
-  Tempo médio: 0.2450 ms
+  Tamanho do vetor: 100
+  Número de comparações: 4950
+  Tempo médio: 0.0100 ms
 ```
 
 Onde:
 - **Algoritmo**: Nome do algoritmo de ordenação
 - **Tipo de Input**: Tipo de entrada (ASC = Ascendente, DESC = Descendente, RAND = Aleatória)
+- **Tamanho do vetor**: Quantidade de elementos do array testado
 - **Número de comparações**: Média de comparações realizadas em 3 execuções
 - **Tempo médio**: Tempo médio de execução em milissegundos
 
@@ -192,10 +194,10 @@ Onde:
 O programa gera automaticamente um arquivo CSV com os resultados dos testes ao final da execução:
 
 ### Ao rodar todos os testes
-Cria um arquivo chamado **`resultados_testes.csv`** contendo os dados de todos os 15 testes (5 algoritmos × 3 tipos de entrada).
+Cria um arquivo chamado **`resultados_testes.csv`** contendo os dados de todos os 120 testes (5 algoritmos × 3 tipos de entrada × 8 tamanhos).
 
 ### Ao rodar testes individuais
-Cria um arquivo chamado **`resultados_[Nome_do_Algoritmo].csv`** contendo apenas os dados daquele algoritmo.
+Cria um arquivo chamado **`resultados_[Nome_do_Algoritmo].csv`** contendo os 24 testes daquele algoritmo (3 tipos de entrada × 8 tamanhos).
 
 ### Formato do CSV
 
@@ -209,10 +211,10 @@ O arquivo possui as seguintes colunas:
 Exemplo de saída:
 ```
 Algoritmo,Tipo de Vetor,Tamanho do Vetor,Número de Comparações,Tempo Médio (ms)
-Bubble Sort,ASC,500,124750,0.5675
-Bubble Sort,DESC,500,124750,1.7280
-Bubble Sort,RAND,500,124750,1.2114
-Insertion Sort,ASC,500,499,0.0045
+Bubble Sort,ASC,100,4950,0.0100
+Bubble Sort,DESC,100,4950,0.0200
+Bubble Sort,RAND,100,4950,0.0150
+Bubble Sort,ASC,1000,499500,0.9500
 ...
 ```
 
@@ -222,9 +224,9 @@ Os arquivos CSV podem ser abertos em qualquer editor de texto ou planilha eletr�
 
 ### Geração de Dados
 
-- **Ascendente**: Array de 1 a 500 em ordem crescente
-- **Descendente**: Array de 500 a 1 em ordem decrescente
-- **Aleatória**: Array com valores aleatórios entre 1 e 5000
+- **Ascendente**: Array de 1 até o tamanho configurado em ordem crescente
+- **Descendente**: Array do tamanho configurado até 1 em ordem decrescente
+- **Aleatória**: Array com valores aleatórios entre 1 e 10 vezes o tamanho configurado
 
 ### Medições
 
