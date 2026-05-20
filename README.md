@@ -11,6 +11,7 @@ Este projeto implementa uma suite completa de testes para cinco algoritmos clás
 - **Merge Sort**
 - **Quick Sort**
 - **Heap Sort**
+- **AOH (Algoritmo de Ordenação Híbrido)**
 
 ## Funcionalidades
 
@@ -43,6 +44,8 @@ trabalho-ordenacao/
 ├── quick_sort.h          # Cabeçalho do Quick Sort
 ├── heap_sort.cpp         # Implementação do Heap Sort
 ├── heap_sort.h           # Cabeçalho do Heap Sort
+├── aoh.cpp               # Implementação do AOH
+├── aoh.h                 # Cabeçalho do AOH
 └── README.md             # Este arquivo
 ```
 
@@ -81,7 +84,7 @@ cd /caminho/para/trabalho-ordenacao
 Execute o comando de compilação:
 
 ```bash
-g++ -O2 -o program main.cpp bubble_sort.cpp insertion_sort.cpp merge_sort.cpp quick_sort.cpp heap_sort.cpp
+g++ -O2 -o program main.cpp bubble_sort.cpp insertion_sort.cpp merge_sort.cpp quick_sort.cpp heap_sort.cpp aoh.cpp
 ```
 
 #### 3. Executar o programa
@@ -110,7 +113,7 @@ cd C:\caminho\para\trabalho-ordenacao
 Execute o comando de compilação:
 
 ```cmd
-g++ -O2 -o program.exe main.cpp bubble_sort.cpp insertion_sort.cpp merge_sort.cpp quick_sort.cpp heap_sort.cpp
+g++ -O2 -o program.exe main.cpp bubble_sort.cpp insertion_sort.cpp merge_sort.cpp quick_sort.cpp heap_sort.cpp aoh.cpp
 ```
 
 #### 3. Executar o programa
@@ -153,7 +156,8 @@ SELECIONE O ALGORITMO
 3 - Merge Sort
 4 - Quick Sort
 5 - Heap Sort
-6 - Voltar
+6 - AOH (Quick + Insertion)
+7 - Voltar
 ==================================================
 Sua escolha:
 ```
